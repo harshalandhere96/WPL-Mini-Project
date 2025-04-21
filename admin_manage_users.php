@@ -74,7 +74,7 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
     }
 }
 
-// Get all users with portfolio counts
+
 $users = $conn->query("
     SELECT u.id, u.username, u.email, u.is_admin, 
            DATE_FORMAT(u.created_at, '%M %d, %Y') as joined_date,

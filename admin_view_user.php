@@ -2,7 +2,6 @@
 session_start();
 include("includes/config.php");
 
-// Check if the user is an admin
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("Location: login.php");
     exit();

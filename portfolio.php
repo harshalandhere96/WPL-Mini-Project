@@ -1,30 +1,24 @@
 <?php
-// Updated portfolio.php - Uses CryptoCompare API instead of CoinGecko
 session_start();
 
-// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Database connection
 $db_host = "localhost";
-$db_user = "root"; // Change if needed
-$db_pass = "";     // Change if needed
+$db_user = "root"; 
+$db_pass = "";    
 $db_name = "crypto_tracker";
 
-// Create connection
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $user_id = $_SESSION['user_id'];
 
-// Fetch available cryptocurrencies
 $result = $conn->query("SELECT * FROM cryptocurrencies ORDER BY name ASC");
 $cryptos = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -37,13 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $buy_price = $_POST['buy_price'];
     $buy_date = $_POST['buy_date'];
 
-    // Validate inputs
     if ($quantity <= 0) {
         $error_message = "Quantity must be greater than zero.";
     } else if ($buy_price <= 0) {
         $error_message = "Buy price must be greater than zero.";
     } else {
-        // Get crypto details
         $stmt = $conn->prepare("SELECT name, symbol FROM cryptocurrencies WHERE id = ?");
         $stmt->bind_param("i", $crypto_id);
         $stmt->execute();
@@ -51,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
 
         if ($crypto) {
-            // Direct insert
             $date_query_part = "";
             $stmt_types = "issdd";
             $stmt_params = [$user_id, $crypto['name'], $crypto['symbol'], $quantity, $buy_price];
@@ -77,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Get current prices from CryptoCompare for preview
 $preview_data = [];
 if (!empty($cryptos)) {
     $symbols = [];
@@ -86,10 +76,8 @@ if (!empty($cryptos)) {
         $symbols[] = strtoupper($crypto['symbol']);
     }
     
-    // Convert symbols array to comma-separated string
     $symbols_list = implode(",", $symbols);
     
-    // CryptoCompare API endpoint for multiple prices
     $api_url = "https://min-api.cryptocompare.com/data/pricemulti?fsyms={$symbols_list}&tsyms=USD";
     
     $ch = curl_init();
@@ -200,7 +188,6 @@ if (!empty($cryptos)) {
     </div>
 
     <script>
-        // Auto-fill current price when cryptocurrency is selected
         document.getElementById('crypto_id').addEventListener('change', function() {
             const selectedOption = this.options[this.selectedIndex];
             const currentPrice = selectedOption.getAttribute('data-price');
@@ -214,7 +201,6 @@ if (!empty($cryptos)) {
             calculateValues();
         });
         
-        // Calculate values on input change
         document.getElementById('quantity').addEventListener('input', calculateValues);
         document.getElementById('buy_price').addEventListener('input', calculateValues);
         
@@ -251,7 +237,6 @@ if (!empty($cryptos)) {
             }
         }
         
-        // Set default date to today
         document.addEventListener('DOMContentLoaded', function() {
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('buy_date').value = today;

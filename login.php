@@ -2,7 +2,7 @@
 include("includes/config.php");
 session_start();
 
-// If already logged in, redirect to appropriate dashboard
+
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
         header("Location: admin_dashboard.php");
@@ -13,17 +13,16 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $error = '';
-$debug_info = ''; // For debugging purposes
+$debug_info = ''; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validate input
     if (empty($email) || empty($password)) {
         $error = "Please enter both email and password.";
     } else {
-        // Check user credentials
+    
         $stmt = $conn->prepare("SELECT id, username, password, is_admin FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -32,28 +31,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             
-            // For debugging
+    
             $debug_info .= "User found: ID=" . $user['id'] . ", Username=" . $user['username'] . ", is_admin=" . $user['is_admin'] . "<br>";
             $debug_info .= "Stored password hash: " . $user['password'] . "<br>";
             
-            // Verify password
+          
             $password_verified = password_verify($password, $user['password']);
             $debug_info .= "Password verification result: " . ($password_verified ? 'Success' : 'Failed') . "<br>";
             
             if ($password_verified) {
-                // Set session variables
+               
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['admin'] = ($user['is_admin'] == 1);
                 
                 $debug_info .= "Session variables set: user_id=" . $_SESSION['user_id'] . ", username=" . $_SESSION['username'] . ", admin=" . ($_SESSION['admin'] ? 'true' : 'false') . "<br>";
                 
-                // Update last login time
+              
                 $stmt = $conn->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
                 $stmt->bind_param("i", $user['id']);
                 $stmt->execute();
                 
-                // Redirect based on user type
+               
                 if ($_SESSION['admin']) {
                     $debug_info .= "Redirecting to admin dashboard<br>";
                     header("Location: admin_dashboard.php");
@@ -74,13 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// For security purposes, in production you should remove this SQL insertion and debug info
-// The code below ensures an admin account exists and is set up correctly
+
 $check_admin = $conn->query("SELECT COUNT(*) as count FROM users WHERE is_admin = 1");
 $admin_count = $check_admin->fetch_assoc()['count'];
 
 if ($admin_count == 0) {
-    // If no admin exists, create one
+  
     $admin_username = "admin";
     $admin_email = "admin@example.com";
     $admin_password = "Admin123!";

@@ -1,23 +1,23 @@
 <?php
-// Updated view_coin.php - Uses CryptoCompare API instead of CoinGecko
+
 session_start();
 
-// Check if user is logged in
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Database connection
+
 $db_host = "localhost";
-$db_user = "root"; // Change if needed
-$db_pass = "";     // Change if needed
+$db_user = "root"; 
+$db_pass = "";    
 $db_name = "crypto_tracker";
 
-// Create connection
+
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 
-// Check connection
+
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -31,7 +31,7 @@ if (!isset($_GET['symbol'])) {
 
 $symbol_param = strtoupper($_GET['symbol']);
 
-// Try to find portfolio entries matching this symbol
+
 $stmt = $conn->prepare("SELECT id, coin_name, symbol, quantity, buy_price, purchase_date FROM portfolio WHERE user_id = ? AND UPPER(symbol) = ?");
 $stmt->bind_param("is", $user_id, $symbol_param);
 $stmt->execute();
@@ -55,7 +55,7 @@ foreach ($portfolio_entries as $entry) {
 
 $average_buy_price = $total_investment / $total_quantity;
 
-// Get current price data from CryptoCompare
+
 $price_data = [];
 $api_url = "https://min-api.cryptocompare.com/data/pricemultifull?fsyms={$symbol}&tsyms=USD";
 
@@ -88,7 +88,7 @@ if ($response) {
     $error_message = "Could not connect to CryptoCompare API.";
 }
 
-// Get historical data for the chart
+
 $historical_data = [];
 $hist_url = "https://min-api.cryptocompare.com/data/v2/histoday?fsym={$symbol}&tsym=USD&limit=30";
 
@@ -107,7 +107,6 @@ if ($hist_response) {
     }
 }
 
-// Get coin info (similar to CoinGecko's /coins/{id} endpoint)
 $coin_info = [];
 $info_url = "https://min-api.cryptocompare.com/data/coin/generalinfo?fsyms={$symbol}&tsym=USD";
 
@@ -302,7 +301,7 @@ if ($info_response) {
     
     <?php if (!empty($historical_data)): ?>
     <script>
-        // Prepare data for Chart.js
+     
         const histData = <?php echo json_encode($historical_data); ?>;
         const labels = histData.map(item => {
             const date = new Date(item.time * 1000);
@@ -310,7 +309,7 @@ if ($info_response) {
         });
         const prices = histData.map(item => item.close);
 
-        // Create the chart
+      
         const ctx = document.getElementById('priceChart').getContext('2d');
         const priceChart = new Chart(ctx, {
             type: 'line',
@@ -360,7 +359,7 @@ if ($info_response) {
             }
         });
 
-        // Function to update chart with different time periods
+      
         function updateChart(days) {
             // Update active button
             document.querySelectorAll('.time-option').forEach(btn => {
@@ -370,7 +369,6 @@ if ($info_response) {
                 }
             });
 
-            // Fetch from server-side to avoid rate limiting
             fetch(`cryptocompare_history.php?symbol=<?php echo $symbol; ?>&days=${days}`)
                 .then(response => response.json())
                 .then(data => {

@@ -35,7 +35,7 @@ if ($result->num_rows > 0) {
     $stmt->bind_param("i", $crypto_id);
     $stmt->execute();
     
-    // Set success message
+   
     $_SESSION['admin_message'] = "Cryptocurrency " . htmlspecialchars($crypto['name']) . " (" . htmlspecialchars($crypto['symbol']) . ") has been deleted.";
     if ($portfolio_deleted > 0) {
         $_SESSION['admin_message'] .= " " . $portfolio_deleted . " portfolio entries were also removed.";

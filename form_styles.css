@@ -6,7 +6,7 @@
     font-size: 1rem;
     color: white;
     transition: border-color 0.3s, box-shadow 0.3s;
-    appearance: auto; /* Ensure the dropdown arrow is visible */
+    appearance: auto; 
 }
 
 .form-group select:focus {

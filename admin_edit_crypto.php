@@ -166,7 +166,7 @@ $stmt->close();
     </div>
     
     <script>
-        // Warning when changing symbol for cryptocurrencies in use
+        
         const symbolInput = document.getElementById('symbol');
         if (symbolInput.hasAttribute('data-original')) {
             const originalValue = symbolInput.getAttribute('data-original');

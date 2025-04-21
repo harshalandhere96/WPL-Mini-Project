@@ -1,6 +1,5 @@
 <?php
-// Updated admin_market_overview.php - Uses CryptoCompare API instead of CoinGecko
-// Removed pie chart as requested
+
 session_start();
 include("includes/config.php");
 

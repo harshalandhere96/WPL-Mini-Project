@@ -66,7 +66,6 @@ $total_portfolios = $conn->query("SELECT COUNT(*) as count FROM portfolio")->fet
     <div class="landing-container">
     <div class="bg-overlay"></div>
     <div class="stars"></div>
-        <!-- Header/Navigation -->
         <header class="main-header">
             <div class="logo">
                 <i class="fas fa-chart-line"></i>

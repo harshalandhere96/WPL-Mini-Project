@@ -13,7 +13,7 @@ $userCount = $conn->query("SELECT COUNT(*) as total FROM users")->fetch_assoc()[
 $cryptoCount = $conn->query("SELECT COUNT(*) as total FROM cryptocurrencies")->fetch_assoc()['total'];
 $portfolioCount = $conn->query("SELECT COUNT(*) as total FROM portfolio")->fetch_assoc()['total'];
 
-// Get the most popular cryptocurrencies
+
 $popularCryptos = $conn->query("
     SELECT coin_name, COUNT(*) as count 
     FROM portfolio 

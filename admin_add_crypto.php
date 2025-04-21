@@ -1,5 +1,5 @@
 <?php
-// Updated admin_add_crypto.php - Uses CryptoCompare API instead of CoinGecko
+
 session_start();
 include("includes/config.php");
 

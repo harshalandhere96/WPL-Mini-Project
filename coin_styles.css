@@ -1,0 +1,445 @@
+/* Modern Coin detail page specific styles */
+
+.breadcrumb {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+.breadcrumb a {
+    color: #38bdf8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.alert {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.alert.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-left: 4px solid #ef4444;
+}
+
+.alert .btn {
+    margin-top: 10px;
+}
+
+.coin-overview {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.coin-overview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 70%);
+    z-index: 0;
+}
+
+.coin-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.coin-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    border-radius: 50%;
+    padding: 5px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 2px solid rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+    object-fit: contain;
+}
+
+.coin-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, #ffffff, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+.coin-price {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.current-price {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ffffff, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-right: 20px;
+    letter-spacing: -0.5px;
+}
+
+.price-change {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.price-change i {
+    margin-right: 8px;
+}
+
+.price-change.positive {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.price-change.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.coin-description {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    position: relative;
+    z-index: 1;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.market-data, .portfolio-data {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.market-data::before, .portfolio-data::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.1), transparent 70%);
+    z-index: 0;
+}
+
+.market-data h2, .portfolio-data h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.market-data h2::after, .portfolio-data h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #38bdf8;
+    border-radius: 2px;
+}
+
+.data-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.data-item {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.data-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.data-item .label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 8px;
+}
+
+.data-item .value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.chart-section {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.chart-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.05), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(99, 102, 241, 0.05), transparent 50%);
+    z-index: 0;
+}
+
+.chart-section h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #38bdf8;
+    border-radius: 2px;
+}
+
+.chart-container {
+    height: 450px;
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.chart-options {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.time-option {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.time-option:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+.time-option.active {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: rgba(56, 189, 248, 0.5);
+    color: #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+.holdings-section {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow-x: auto;
+    position: relative;
+}
+
+.holdings-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.05), transparent 70%);
+    z-index: 0;
+}
+
+.holdings-section h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.holdings-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: #38bdf8;
+    border-radius: 2px;
+}
+
+.action-link {
+    color: rgba(255, 255, 255, 0.7);
+    margin-right: 12px;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.action-link:hover {
+    color: #38bdf8;
+    transform: scale(1.2);
+}
+
+.action-link.delete {
+    color: rgba(239, 68, 68, 0.7);
+}
+
+.action-link.delete:hover {
+    color: #ef4444;
+}
+
+.positive {
+    color: #10b981;
+}
+
+.negative {
+    color: #ef4444;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .coin-price {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .current-price {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+    
+    .data-items {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .coin-overview, .market-data, .portfolio-data, .chart-section, .holdings-section {
+        padding: 20px;
+    }
+    
+    .coin-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .coin-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .coin-price {
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .chart-container {
+        height: 300px;
+    }
+}

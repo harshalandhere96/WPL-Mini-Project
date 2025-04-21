@@ -1,6 +1,5 @@
 <?php
 include("includes/config.php");
-// Start the session after including config
 session_start();
 
 // If already logged in, redirect to appropriate dashboard

@@ -1,4 +1,3 @@
-/* Modern Login & Register Page Styles - Based on Bitcoin theme */
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +16,6 @@ body {
     overflow: hidden;
 }
 
-/* Background Elements */
 body::before {
     content: '';
     position: absolute;

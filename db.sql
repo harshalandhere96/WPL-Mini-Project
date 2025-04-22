@@ -35,10 +35,6 @@ CREATE TABLE portfolio (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Insert default admin user
--- Default password is 'admin123' - change this in production!
-INSERT INTO users (username, email, password, is_admin) 
-VALUES ('admin', 'admin@example.com', '$2y$10$qo7xHBDA3SzCoB4lK8.CJeCxTJMb.fG/wgHD3PAjOY4Jp4tK/qJbG', 1);
 
 -- Insert some common cryptocurrencies
 INSERT INTO cryptocurrencies (name, symbol) VALUES 
